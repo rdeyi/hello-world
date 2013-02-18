@@ -10,7 +10,7 @@ LDR_BIN:=$(subst .asm,.bin,$(LDR))
 KERNEL_BIN:=$(subst .asm,.bin,$(KERNEL))
 
 IMG:=a.img
-FLOPPY:=/mnt/floppy/
+FLOPPY:=/mnt/
 
 .PHONY : everything
 
@@ -32,5 +32,5 @@ $(LDR_BIN) : $(LDR)
 
 $(KERNEL_BIN) : $(KERNEL)
 	nasm -f elf -o $(subst .asm,.o,$(KERNEL)) $<
-	ld -s -o $@ $(subst .asm,.o,$(KERNEL))
+	ld -m elf_i386 -s -o $@ $(subst .asm,.o,$(KERNEL))
 
